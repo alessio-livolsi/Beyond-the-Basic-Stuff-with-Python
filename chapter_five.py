@@ -128,3 +128,31 @@ You rolled a 1
 
 # Above can be replaced with a simple function call
 print('You roleed a', random.randint(1, 6))
+
+# List Comprehensions Within List Comprehensions
+spam = []
+for number in range(100):
+    if number % 5 != 0:
+        spam.append(str(number))
+print(spam)
+
+spam = {str(number) for number in range(100) if number % 5!= 0}
+print(spam)
+
+spam = {str(number): number for number in range(100) if number % 5 !=0}
+print(spam)
+
+# Nested list comprehensions
+nestedIntList = [[0, 1, 2, 3], [4], [5, 6], [7, 8, 9]]
+nestedStrList = []
+for sublist in nestedIntList:
+    nestedStrList.append{(str(i) for i in sublist)}
+print(nestedIntList)
+
+# Two loops same flattened list
+nestedList = [[0, 1, 2, 3], [4], [5, 6], [7, 8, 9]]
+flatList = []
+for sublist in nestedList:
+    for num in sublist:
+        flatList.append(num)
+print(flatList)
