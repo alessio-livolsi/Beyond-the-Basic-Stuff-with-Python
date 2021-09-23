@@ -156,3 +156,50 @@ for sublist in nestedList:
     for num in sublist:
         flatList.append(num)
 print(flatList)
+
+# Using except blocks to catch exceptions, using a pass with except block can do nothing
+try:
+    num = input('Enter as number: ')
+    num = int(num)
+except ValueError:
+    pass
+# Enter a number: 42
+print(num)
+'forty two'
+
+# Handling exceptions with poor error messages is another code smell. Look at this example:
+try:
+    num = input('Enter a number: ')
+    num = int(num)
+except ValueError:
+    print('An incorrect value was passed to int()')
+# Enter a number: 42
+# An incorrect number was passed to int()
+
+# Function that indicates whether a file we want to delete is already nonexistent:
+import os
+def deleteWithConfirmation(filename):
+    try:
+        if (input('Delete ' + filename + ', are you sure? Y/N') == 'Y'):
+            os.unlink(filename)
+    except FileNotFoundError:
+        print('That file already did not exist.')
+
+# Proponents of this code smell myth argue that because functions should always do just one thing, and error handling is one thing, we should split this function into two functions. They argue that if you use a try-except statement, it should be the first statement in a function and envelop all of the function’s code to look like this:
+import os
+def handleErrorForDeleteWithConfirmation(filename):
+    try:        
+        _deleteWithConfirmation(filename)
+    except FileNotFoundError:
+        print('That file already did not exist.')
+
+def _deleteWithConfirmation(filename):
+    if (input('Delete ' + filename + ', are you sure? Y/N') == 'Y'):
+        os.unlink(filename)
+
+# Example of Flag Arguements
+def someFunction(flagArgument):
+    if flagArgument:
+        # Run some code...
+    else:
+        # Run some completely different code...
